@@ -146,7 +146,7 @@ body {
 }
 
 .footer-logos img {
-  transform: rotate(-90deg); height: 140px;
+  height: 140px;
   border-radius: 50%; /* Slightly rounded logos */
   opacity: 0.8; /* Slightly faded logos */
 }
