@@ -28,8 +28,8 @@ document.addEventListener("DOMContentLoaded", () => {
 const initializeVanta = (element) => {
   const vantaOptions = {
     el: element,
-    mouseControls: true,
-    touchControls: true,
+    mouseControls: false,
+    touchControls: false,
     gyroControls: false,
     minHeight: 200.0,
     minWidth: 200.0,
@@ -55,8 +55,8 @@ const initializeVanta = (element) => {
 
   const birdsOptionsSchedule = {
     el: "#schedule",
-    mouseControls: true,
-    touchControls: true,
+    mouseControls: false,
+    touchControls: false,
     gyroControls: false,
     minHeight: 200.0,
     minWidth: 200.0,
@@ -72,8 +72,8 @@ const initializeVanta = (element) => {
 
   const birdsOptionsHistory = {
     el: "#history",
-    mouseControls: true,
-    touchControls: true,
+    mouseControls: false,
+    touchControls: false,
     gyroControls: false,
     minHeight: 200.0,
     minWidth: 200.0,
