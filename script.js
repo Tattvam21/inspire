@@ -26,10 +26,11 @@ document.addEventListener("DOMContentLoaded", () => {
 }); // 1 second delay
 
 const initializeVanta = (element) => {
+  // Vanta.js options
   const vantaOptions = {
     el: element,
     mouseControls: false,
-    touchControls: false,
+    touchControls: true,
     gyroControls: false,
     minHeight: 200.0,
     minWidth: 200.0,
@@ -42,21 +43,42 @@ const initializeVanta = (element) => {
     rotationMultiplier: 0.05,
   };
 
+  // Function to safely destroy and re-initialize Vanta
+  const safeVantaInitialization = (vantaInstance, vantaOptions, vantaType) => {
+    try {
+      if (vantaInstance) {
+        vantaInstance.destroy();
+      }
+
+      // Initialize Vanta based on the specified type
+      if (vantaType === "NET") {
+        return VANTA.NET(vantaOptions);
+      } else if (vantaType === "RINGS") {
+        return VANTA.RINGS(vantaOptions);
+      } else if (vantaType === "BIRDS") {
+        return VANTA.BIRDS(vantaOptions);
+      } else {
+        console.error("Unsupported Vanta type:", vantaType);
+        return null;
+      }
+    } catch (error) {
+      console.error("Error initializing Vanta:", error);
+      return null;
+    }
+  };
+
   if (element === "#headerL") {
-    if (headerNet) headerNet.destroy();
-    headerNet = VANTA.NET(vantaOptions);
+    headerNet = safeVantaInitialization(headerNet, vantaOptions, "NET");
   } else if (element === "#events") {
-    if (eventsRings) eventsRings.destroy();
-    eventsRings = VANTA.RINGS(vantaOptions);
+    eventsRings = safeVantaInitialization(eventsRings, vantaOptions, "RINGS");
   } else if (element === "#sponsors") {
-    if (sponsorsRings) sponsorsRings.destroy();
-    sponsorsRings = VANTA.RINGS(vantaOptions);
+    sponsorsRings = safeVantaInitialization(sponsorsRings, vantaOptions, "RINGS");
   }
 
   const birdsOptionsSchedule = {
     el: "#schedule",
     mouseControls: false,
-    touchControls: false,
+    touchControls: true,
     gyroControls: false,
     minHeight: 200.0,
     minWidth: 200.0,
@@ -73,7 +95,7 @@ const initializeVanta = (element) => {
   const birdsOptionsHistory = {
     el: "#history",
     mouseControls: false,
-    touchControls: false,
+    touchControls: true,
     gyroControls: false,
     minHeight: 200.0,
     minWidth: 200.0,
